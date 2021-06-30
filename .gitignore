@@ -1,0 +1,6 @@
+#.gitignore
+#git commit(백업)에서 제외할 대상을 지정
+bin/
+*.class
+*.exe
+#*(와일드카드)/백업하지마라=앞에 없는거로 같다
