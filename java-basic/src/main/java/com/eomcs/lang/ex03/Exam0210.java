@@ -41,5 +41,16 @@ public class Exam0210 {
     //- 숫자 앞에 0이 있어도 된다.
     System.out.println(0x064);
     System.out.println(0X064);
+
+
+    System.out.println();
+    System.out.println("\\    /\\");
+    System.out.println(" )  ( ')");                           
+    System.out.println("(  /  )");   
+
+    //    System.out.println(" \(__)|");                                                                                                                            
+
+    System.out.println("Hello \nWorld");
+    System.out.println("Hello \"World\"");// Hello "World"
   }
 }

@@ -31,6 +31,8 @@ public class Exam0410 {
     System.out.println('\uac00');  // 가
     System.out.println('\uAC00');  // 가 (16진수는 대소문자를 구분하지 않는다)
 
+    System.out.println("\u0042");
+
     // \ 바로 뒤에 8진수로 적을 수 있다.
     // 단, 0 ~ 377 범위의 8진수만 가능하다.
     System.out.println('\101'); // A
@@ -44,6 +46,7 @@ public class Exam0410 {
     System.out.println('\u00a9'); // copyright를 뜻하는 '©' 문자 코드
     System.out.println('\u03c0'); // 수학의 파이 기호 'π'
     System.out.println('\u03a3'); // 수학의 시그마 기호 'Σ'
+
   }
 }
 
@@ -94,7 +97,7 @@ public class Exam0410 {
 //     - 한글은 규칙에 따라 3바이트로 변환한다.
 //
 // 폰트
-// 1) Raster 폰트(bitcamp 폰트)
+// 1) Raster 폰트(bitmap 폰트)
 // - 크기를 늘리면 계단현상 발생
 // - 폰트를 도트(점) 정보로 저장한다.
 // - 출력 속도가 빠르다.
