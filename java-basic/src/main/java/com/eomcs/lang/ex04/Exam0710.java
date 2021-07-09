@@ -1,17 +1,21 @@
 package com.eomcs.lang.ex04;
 
+
+/// 아직 공부하지마(720번) 710 3가지 종류 있다는 거만 알고, 자세한 건 나중에
+
 //# 변수의 종류
 public class Exam0710 {
-  
+
   int a; // 인스턴스 변수
-  
+
+  ///static 이 붙은 건 클래스 변수
   static int b; // 클래스 변수
 
-  
+
   public static void main(String[] args/*로컬변수=파라미터*/) {
-    
+
     int c; // 로컬 변수
-    
+
   }
 }
 
