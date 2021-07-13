@@ -26,6 +26,11 @@ public class Exam0162 {
     else
       System.out.println("노인입니다.");
 
+    //    if (age < 8) {
+    //      System.out.println("아동");
+    //    } else if (age <11 )
+
+
     keyScan.close();
   }
 }

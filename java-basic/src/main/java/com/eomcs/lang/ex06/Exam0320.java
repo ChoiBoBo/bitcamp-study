@@ -10,7 +10,9 @@ public class Exam0320 {
     // 1부터 100까지의 합은?
     while (count < 100) {
       //count++;
-      //sum += count;
+      //sum += count; <-- 같은 것(sum = sum + count;)
+
+      //위에 2개(count++;), (sum += count;)같은거 
       sum += ++count;
     }
     System.out.printf("count=%d, sum=%d\n", count, sum);
