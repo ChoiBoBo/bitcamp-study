@@ -12,6 +12,8 @@ public class Exam0330 {
     int b;
   }
 
+  //MyObject 레퍼런스인데, ref.a = 100; 불러오지 않고 // 힙메모리
+
   static void swap(MyObject ref) {
     System.out.printf("swap(): a=%d, b=%d\n", ref.a, ref.b);
     int temp = ref.a;
