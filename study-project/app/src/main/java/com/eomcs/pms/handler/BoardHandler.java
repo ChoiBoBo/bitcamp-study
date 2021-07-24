@@ -47,7 +47,7 @@ public class BoardHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no); 
+    Board board = findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -128,6 +128,8 @@ public class BoardHandler {
     }
     return -1;
   }
+
+
 }
 
 
