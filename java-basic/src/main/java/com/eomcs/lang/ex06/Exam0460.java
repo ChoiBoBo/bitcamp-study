@@ -2,7 +2,6 @@ package com.eomcs.lang.ex06;
 
 import java.util.ArrayList;
 
-//나중에함(컬렉션)
 // # 흐름 제어문 - for 반복문과 컬렉션
 //
 public class Exam0460 {

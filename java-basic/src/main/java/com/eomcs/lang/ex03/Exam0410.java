@@ -31,8 +31,6 @@ public class Exam0410 {
     System.out.println('\uac00');  // 가
     System.out.println('\uAC00');  // 가 (16진수는 대소문자를 구분하지 않는다)
 
-    System.out.println("\u0042");
-
     // \ 바로 뒤에 8진수로 적을 수 있다.
     // 단, 0 ~ 377 범위의 8진수만 가능하다.
     System.out.println('\101'); // A
@@ -46,7 +44,6 @@ public class Exam0410 {
     System.out.println('\u00a9'); // copyright를 뜻하는 '©' 문자 코드
     System.out.println('\u03c0'); // 수학의 파이 기호 'π'
     System.out.println('\u03a3'); // 수학의 시그마 기호 'Σ'
-
   }
 }
 

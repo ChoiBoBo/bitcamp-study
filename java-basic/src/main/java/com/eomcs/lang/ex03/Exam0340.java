@@ -8,9 +8,6 @@ package com.eomcs.lang.ex03;
 //
 public class Exam0340 {
 
-  static float test = 12.375f;
-  static double test2 = 12.375; 
-
   public static void main(String[] args) {
 
     //## 4byte(float) 부동소수점의 유효자릿수
@@ -30,22 +27,7 @@ public class Exam0340 {
     //소수점을 뺀 후 16자리 숫자까지는 거의 정상적으로 저장된다.
     System.out.println(987654321.1234567);
     System.out.println(9.876543211234567);
-    System.out.println(987654321123456.7); //비정상 저장되어 8E14로 나옴
-
-    //    System.out.println();
-    //
-    //    System.out.println(98765432112345.67); // 정상으로 저장
-    //
-    //    System.out.println();
-    //
-    //    System.out.println(9876543211234567.7); //16자리 넘어가서 8E로 나옴
-    //    System.out.println(98765432112345678.7); //16자리 넘어가서 8E로 나옴
-    //    System.out.println(9876543211234567891.7); //16자리 넘어가서 8E로 나옴
-
-    // 16자리까지는 완벽이 아니라 거의 정상적으로 저장된다고 설명되어 있습니다.
-    // 제 의견으로 정상적으로 작동이 안될 경우, 8E(숫자)로 표현되는 것 같아요.
-
-
+    System.out.println(987654321123456.7);
     System.out.println("----------------------------");
 
     //유효자릿수가 16자리를 넘어가는 경우 값이 잘려서 저장될 수 있다.

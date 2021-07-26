@@ -1,4 +1,4 @@
-
+package com.eomcs.lang;
 
 //# 패키지와 클래스
 //- 여러 개발자가 같은 이름의 클래스를 만들 수 있다.
@@ -53,7 +53,6 @@
 class Hello3 {
   public static void main(String[] args) {
     System.out.println("Hello, World!");
-
   }
 }
 
