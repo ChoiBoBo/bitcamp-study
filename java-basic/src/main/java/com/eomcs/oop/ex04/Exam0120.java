@@ -14,7 +14,9 @@ public class Exam0120 {
     System.out.println(d1);
 
     // 년, 월, 일 값으로 날짜 인스턴스를 초기화시킨다.
-    Date d2 = new Date(121, 2, 20);
+    // 사용자가 Deprecated 사용하면, 아래처럼 줄이 그어진다. // 즉 사용하지마라.
+    // 인스턴스를 만들 때, 적절한 생성자를 선택해서 유용한 값으로 선택해라!
+    Date d2 = new Date(121, 7, 28);
     System.out.println(d2);
 
     // 1970년 1월 1일 0시 0분 0초부터 측정된 밀리초를 가지고 

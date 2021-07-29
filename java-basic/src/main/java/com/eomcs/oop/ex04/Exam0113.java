@@ -21,10 +21,10 @@ public class Exam0113 {
         (byte)0x23, // #
         (byte)0x25, // %
         (byte)0x2b, // +
-        (byte)0xea, (byte)0xb0, (byte)0x80, // 가
-        (byte)0xea, (byte)0xb0, (byte)0x81, // 각
-        (byte)0xeb, (byte)0x98, (byte)0x98, // 똘
-        (byte)0xeb, (byte)0x98, (byte)0xa5  // 똥
+        (byte)0xea, (byte)0xb0, (byte)0x80, // 가 //utf-8로 인코딩
+        (byte)0xea, (byte)0xb0, (byte)0x81, // 각 //utf-8로 인코딩
+        (byte)0xeb, (byte)0x98, (byte)0x98, // 똘 //utf-8로 인코딩
+        (byte)0xeb, (byte)0x98, (byte)0xa5  // 똥 //utf-8로 인코딩
     };
 
     String s1 = new String(bytes);
@@ -52,7 +52,10 @@ public class Exam0113 {
     // => PowerShell 이 아닌 Command 창에서 실행하라!
     //    PowerShell 에서는 -Dfile.encoding 옵션을 제대로 처리하지 못한다.
     //    도트(.)를 분리 문자로 인식한다.
-    // 
+
+
+    // => java -Dfile.encoding=UTF-8 -cp bin/main 클래스명
+    // 이클립스는 자동적으로 지정해서 JVM를 실행해줘.
   }
 }
 
