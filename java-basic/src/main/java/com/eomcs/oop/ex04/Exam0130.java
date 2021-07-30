@@ -1,7 +1,4 @@
 // 생성자 활용 예 - java.util.Calendar 클래스의 생성자
-
-// 독특하게 캘린더는 생성자를 만들지 수 없다.
-
 package com.eomcs.oop.ex04;
 
 import java.util.Calendar;

@@ -36,7 +36,7 @@ public class Exam0112 {
     // => 즉 bytes 배열에 EUC-KR의 코드 값이 들어 있다고 알려준다.
     //    그러면 JVM은 바이트 배열에 들어 있는 값을 제대로 유니코드 바꿀 것이다.
     // 
-    String s2 = new String(bytes, "EUC-KR"); //bytes 코드가 들어 있는데, 너가 기본적으로 쓰는 UTF-8 아니라,EUC-KR(UTF-16)으로 작성해줘 
+    String s2 = new String(bytes, "EUC-KR");
     System.out.println(s2);
   }
 }

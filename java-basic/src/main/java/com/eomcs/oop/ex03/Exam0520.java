@@ -4,7 +4,6 @@ package com.eomcs.oop.ex03;
 import java.sql.Date;
 
 public class Exam0520 {
-
   static class A {
     byte b2;
     short s2;

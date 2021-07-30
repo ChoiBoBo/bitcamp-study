@@ -10,7 +10,6 @@ public class Exam0210 {
     char c = s1.charAt(1);
     System.out.println(c);
 
-    // 여기서 하고 싶은 말은 compareTo 인스턴스 메서드이다.
     System.out.println(s1.compareTo("Helli"));
     System.out.println(s1.compareTo("Hello"));
     System.out.println(s1.compareTo("Hellq"));
