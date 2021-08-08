@@ -28,7 +28,7 @@ public class LinkedList implements List {
       // 새로 만든 노드를 마지막 노드로 설정한다. 
       tail = node;
     }
-    //참고
+    //참고 asd
     size++;
   }
 
