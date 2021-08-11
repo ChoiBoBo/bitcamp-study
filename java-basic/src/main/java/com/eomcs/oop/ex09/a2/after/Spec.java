@@ -7,6 +7,7 @@ package com.eomcs.oop.ex09.a2.after;
 //
 public interface Spec {
 
+
   // 호출 규칙을 정의할 때,
   // => 규칙은 공개되어야 하기 때문에 무조건 public 이다.
   // => 규칙이기 때문에 당장 구현할 필요는 없다. 그래서 추상 메서드이다.

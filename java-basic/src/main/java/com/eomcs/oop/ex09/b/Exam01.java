@@ -10,6 +10,7 @@ interface MyInterface {
   //   - 인터페이스에 선언하는 메서드는 호출 규칙을 정의한 것이다.
   //   - 규칙은 클래스가 따라야 한다.
   //   - 그래서 인터페이스에 선언되는 모든 메서드는 몸체를 구현하지 않는다.
+  // 
   public abstract void m1();
 
   // public 을 생략할 수 있다.
@@ -35,9 +36,9 @@ abstract class MyInterfaceImpl implements MyInterface {
 
   // public 보다 접근 범위를 좁힐 수는 없다.
   @Override
-  //  private void m2() {}  // 컴파일 오류!
-  //  protected void m2() {} // 컴파일 오류!
-  //  void m2() {} // 컴파일 오류!
+  //    private void m2() {}  // 컴파일 오류!
+  //    protected void m2() {} // 컴파일 오류!
+  //    void m2() {} // 컴파일 오류!
   public void m2() {} // OK!
 
   // 인터페이스의 모든 메서드를 구현해야 한다.
