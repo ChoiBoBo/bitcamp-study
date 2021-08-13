@@ -5,7 +5,7 @@ class B {
   // 클래스 멤버
   static int v1 = 10;
   static void m1() {}
-
+  //asd
   // 인스턴스 멤버
   int v2 = 20;
   int v3 = 30;

@@ -12,10 +12,6 @@ package com.eomcs.oop.ex08.b;
 // 혹 나중에 메서드에 기타 코드를 추가할 경우를 대비하기 위함이다.
 // 변수를 직접 사용하면 변수를 제어하는 코드를 삽입하기 어렵기 때문이다.
 //
-/**
- * @author LG
- *
- */
 class Customer4 {
 
   // 외부에서 인스턴스 변수에 직접 접근하지 못하도록 막는다!
@@ -23,6 +19,7 @@ class Customer4 {
   private int age;
   private int weight;
   private int height;
+
   public String getName() {
     return name;
   }
@@ -47,8 +44,6 @@ class Customer4 {
   public void setHeight(int height) {
     this.height = height;
   }
-
-
 }
 
 public class Exam0140 {
