@@ -1,4 +1,4 @@
-package com.eomcs.pms.handler;
+package com.eomcs.util;
 
 public class ArrayList extends AbstractList {
 
@@ -48,8 +48,9 @@ public class ArrayList extends AbstractList {
     return -1;
   }
 
+  @Override
   public Object get(int index) {
-    if(index < 0 || index >= this.size) {
+    if (index < 0 || index >= this.size) { // 유효하지 않은 인덱스인 경우
       return null;
     }
     return this.list[index];
@@ -58,9 +59,10 @@ public class ArrayList extends AbstractList {
   @Override
   public Object remove(int index) {
 
-    if(index < 0 || index >= this.size) {
+    if (index < 0 || index >= this.size) { // 인덱스가 무효하다면
       return null;
     }
+
     Object deleted = this.list[index]; // 삭제할 항목 저장
 
     for (int i = index + 1; i < this.size; i++) {
@@ -71,3 +73,11 @@ public class ArrayList extends AbstractList {
     return deleted; // 삭제한 항목 리턴
   }
 }
+
+
+
+
+
+
+
+
