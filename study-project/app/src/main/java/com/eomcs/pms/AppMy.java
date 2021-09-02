@@ -11,7 +11,7 @@ import java.util.Scanner;
 //6) 조회용으로만 사용할 변수라면 상수로 선언한다.
 //7) 특정 조건에 따라 반복을 멈춘다.
 //8) 날짜의 출력형식을 "yyyy-MM-dd"로 변경한다.
-public class App {
+public class AppMy {
 
   public static void main(String[] args) {
     System.out.println("[회원]");
