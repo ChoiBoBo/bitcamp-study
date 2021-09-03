@@ -11,6 +11,10 @@ import java.util.Scanner;
 //6) /member/add와 /member/list 명령을 구분해 보자!
 //7) /member/add 명령 처리
 //8)
+//9)
+//10)
+//11)
+//12)
 public class AppMy {
 
   public static void main(String[] args) {
@@ -26,6 +30,25 @@ public class AppMy {
     String[] tel = new String[LENGTH];
     Date[] registeredDate = new Date[LENGTH];
     int size = 0;
+
+    final int PROJECT_LENGTH = 1000;
+    int[] pNo = new int[PROJECT_LENGTH];
+    String[] pTitle = new String[PROJECT_LENGTH];
+    String[] pContent = new String[PROJECT_LENGTH];
+    Date[] pStartDate = new Date[PROJECT_LENGTH];
+    Date[] pEndDate = new Date[PROJECT_LENGTH];
+    String[] pOwner = new String[PROJECT_LENGTH];
+    String[] pMembers = new String[PROJECT_LENGTH];
+    int pSize = 0;
+
+    final int TASK_LENGTH = 100;
+    int[] tNo = new int[TASK_LENGTH];
+    String[] tContent = new String[TASK_LENGTH];
+    Date[] tDeadLine = new Date[TASK_LENGTH];
+    String[] tOwner = new String[TASK_LENGTH];
+    int[] tStatus = new int[TASK_LENGTH];
+    int tSize = 0;
+
 
     while (true) {
       System.out.print("명령> ");
@@ -55,6 +78,7 @@ public class AppMy {
 
         registeredDate[size] = new Date(System.currentTimeMillis());
 
+
         size++;
 
       } else if (input.equals("/member/list")) {
@@ -66,12 +90,96 @@ public class AppMy {
               no[i], name[i], email[i], tel[i], registeredDate[i]);
         }
 
+      }else if(input.equals("/project/add")) {
+        System.out.println("[프로젝트 등록]");
 
-      } else {
-        System.out.println("실행할 수 없는 명령입니다.");
+        System.out.println("번호 ?");
+        pNo[pSize] = Integer.valueOf(keyboardScan.nextLine());
+
+        System.out.println("프로젝트명 ?");
+        pTitle[pSize] = keyboardScan.nextLine();
+
+        System.out.println("내용 ?");
+        pContent[pSize] = keyboardScan.nextLine();
+
+        System.out.println("시작일 ?");
+        pStartDate[pSize] = Date.valueOf(keyboardScan.nextLine());
+
+        System.out.println("종료일 ?");
+        pEndDate[pSize] = Date.valueOf(keyboardScan.nextLine());
+
+        System.out.println("만든이 ?");
+        pOwner[pSize]= keyboardScan.nextLine();
+
+        System.out.println("팀원 ?");
+        pMembers[pSize]= keyboardScan.nextLine();
+
+        pSize++;
+
+      } else if(input.equals("/project/list")) {
+        System.out.println("[프로젝트 목록]");
+
+        for(int i = 0; i < pSize; i++) {
+          System.out.printf("%d, %s, %s, %s, %s\n", 
+              pNo[i], pTitle[i], pStartDate[i], pEndDate[i], pOwner[i]);
+        }
+
+      } else if(input.equals("/task/add")) {
+        System.out.println("[작업 등록]");
+
+
+        System.out.println("번호? ");
+        tNo[tSize] = Integer.valueOf(keyboardScan.nextLine());
+
+        System.out.println("내용? ");
+        tContent[tSize] = keyboardScan.nextLine();
+
+        System.out.print("내용? ");
+        tContent[tSize] = keyboardScan.nextLine();
+
+        System.out.println("마감일?");
+        tDeadLine[tSize] = Date.valueOf(keyboardScan.nextLine());
+
+        System.out.println("상태?");
+        System.out.println("0: 신규");
+        System.out.println("1: 진행중");
+        System.out.println("2: 완료");
+        System.out.print("> ");
+        tStatus[tSize] = Integer.valueOf(keyboardScan.nextLine());
+
+        System.out.println("담당자? ");
+        tOwner[tSize] = keyboardScan.nextLine();
+
+        tSize++;
+
+
+      } else if(input.equals("/task/list")) {
+        System.out.println("[작업 목록]");
+
+        for (int i = 0; i < tSize; i++) {
+          String stateLabel = null;
+          switch (tStatus[i]) {
+            case 1:
+              stateLabel = "진행중";
+              break;
+            case 2:
+              stateLabel = "완료";
+              break;
+            default:
+              stateLabel = "신규";
+          }
+
+          System.out.println();
+
+        }
+        System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
+            tNo[i], tContent[i], tDeadline[i], stateLabel, tOwner[i]);
       }
-      System.out.println();
+    } else {
+      System.out.println("실행할 수 없는 명령입니다.");
     }
-    keyboardScan.close();
+    System.out.println();
   }
+  keyboardScan.close();
+}
 }
