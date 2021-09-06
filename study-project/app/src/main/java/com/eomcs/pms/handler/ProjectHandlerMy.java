@@ -3,7 +3,7 @@ package com.eomcs.pms.handler;
 import com.eomcs.pms.domain.Project;
 import com.eomcs.util.Prompt;
 
-public class ProjectHandler {
+public class ProjectHandlerMy {
 
   static final int MAX_LENGTH = 5;
 

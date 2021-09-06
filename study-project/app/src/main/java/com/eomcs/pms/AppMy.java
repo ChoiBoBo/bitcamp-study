@@ -1,8 +1,10 @@
 package com.eomcs.pms;
 
+import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.BoardHandlerMy;
-import com.eomcs.pms.handler.MemberHandler;
+import com.eomcs.pms.handler.MemberHandlerMy;
 import com.eomcs.pms.handler.ProjectHandler;
+import com.eomcs.pms.handler.ProjectHandlerMy;
 import com.eomcs.pms.handler.TaskHandler;
 import com.eomcs.util.Prompt;
 
@@ -10,13 +12,22 @@ public class AppMy {
 
   public static void main(String[] args) {
 
+    // 각 게시판의 게시글을 담을 메모리(boards 레퍼런스 배열과 size)를 준비한다.
+    // new BoardHandler()
+    //   - BoardHandler가 작업할 때 사용할 변수를 준비한다. 
+    //   - BoardHandler는 게시글을 다루는 작업을 한다.
+    BoardHandlerMy boardHandler = new BoardHandlerMy();
+    BoardHandlerMy boardHandler2 = new BoardHandlerMy();
+    BoardHandlerMy boardHandler3 = new BoardHandlerMy();
+    BoardHandlerMy boardHandler4 = new BoardHandlerMy();
+    BoardHandlerMy boardHandler5 = new BoardHandlerMy();
+    BoardHandlerMy boardHandler6 = new BoardHandlerMy();
 
-    BoardHandlerMy boardHandlerMy = new BoardHandlerMy();
-    BoardHandlerMy boardHandlerMy2 = new BoardHandlerMy();
-    BoardHandlerMy boardHandlerMy3 = new BoardHandlerMy();
-    BoardHandlerMy boardHandlerMy4 = new BoardHandlerMy();
-    BoardHandlerMy boardHandlerMy5 = new BoardHandlerMy();
-    BoardHandlerMy boardHandlerMy6 = new BoardHandlerMy();
+    MemberHandlerMy memberHandler = new MemberHandlerMy();
+
+    ProjectHandler projectHandler = new ProjectHandler();
+
+    TaskHandler taskHandler = new TaskHandler();
 
     while (true) {
       String input = Prompt.inputString("명령> ");
@@ -25,13 +36,13 @@ public class AppMy {
         System.out.println("안녕!");
         break;
       } else if (input.equals("/member/add")) {
-        MemberHandler.add();
+        MemberHandlerMy.add();
 
       } else if (input.equals("/member/list")) {
-        MemberHandler.list();
+        MemberHandlerMy.list();
 
       }  else if (input.equals("/project/add")) {
-        ProjectHandler.add();
+        ProjectHandlerMy.add();
 
       }  else if (input.equals("/project/list")) {
         ProjectHandler.list();
@@ -43,40 +54,40 @@ public class AppMy {
         TaskHandler.list();
 
       }  else if (input.equals("/board/add")) {
-        BoardHandlerMy.add(boardHandlerMy);
+        BoardHandler.add();
 
       }  else if (input.equals("/board/list")) {
-        BoardHandlerMy.list(boardHandlerMy);
+        BoardHandler.list();
 
       }  else if (input.equals("/board2/add")) {
-        BoardHandlerMy.add(boardHandlerMy2);
+        BoardHandler.add();
 
       }  else if (input.equals("/board2/list")) {
-        BoardHandlerMy.list(boardHandlerMy2);
+        BoardHandler.list();
 
       }  else if (input.equals("/board3/add")) {
-        BoardHandlerMy.add(boardHandlerMy3);
+        BoardHandler.add();
 
       }  else if (input.equals("/board3/list")) {
-        BoardHandlerMy.list(boardHandlerMy3);
+        BoardHandler.list();
 
       }  else if (input.equals("/board4/add")) {
-        BoardHandlerMy.add(boardHandlerMy4);
+        BoardHandler.add();
 
       }  else if (input.equals("/board4/list")) {
-        BoardHandlerMy.list(boardHandlerMy4);
+        BoardHandler.list();
 
       }  else if (input.equals("/board5/add")) {
-        BoardHandlerMy.add(boardHandlerMy5);
+        BoardHandler.add();
 
       }  else if (input.equals("/board5/list")) {
-        BoardHandlerMy.list(boardHandlerMy5);
+        BoardHandler.list();
 
       }  else if (input.equals("/board6/add")) {
-        BoardHandlerMy.add(boardHandlerMy6);
+        BoardHandler.add();
 
       }  else if (input.equals("/board6/list")) {
-        BoardHandlerMy.list(boardHandlerMy6);
+        BoardHandler.list();
 
       } else {
         System.out.println("실행할 수 없는 명령입니다.");
