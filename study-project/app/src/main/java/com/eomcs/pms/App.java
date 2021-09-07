@@ -127,8 +127,47 @@ public class App {
     // 게시글 데이터를 파일로 내보내기(저장하기, 쓰기)
     try (FileOutputStream out = new FileOutputStream ("board.date")) { 
       for(Board board : boardList) {
+        out.write(board.getNo() >> 24);
+        out.write(board.getNo() >> 16);
+        out.write(board.getNo() >> 8);
         out.write(board.getNo());
+
+        //2) 게시글 제목
+        byte[] bytes = board.getTitle().getBytes("UTF-8");
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        bytes =board.getContent().getBytes("UTF-8");
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        String dateStr = board.getRegisteredDate().toString();
+        bytes = dateStr .getBytes("UTF-8");
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
+        out.write(board.getViewCount() >> 24);
+        out.write(board.getViewCount() >> 16);
+        out.write(board.getViewCount() >> 8);
+        out.write(board.getViewCount());
+
+
+        out.write(board.getWriter().getNo() >> 24);
+        out.write(board.getWriter().getNo() >> 16);
+        out.write(board.getWriter().getNo() >> 8);
+        out.write(board.getWriter().getNo());
+
+
+        bytes = board.getTitle().getBytes("UTF-8");
+        out.write(bytes.length >> 8);
+        out.write(bytes.length);
+        out.write(bytes);
+
       }
+
     } catch(Exception e) {
       System.out.println("게스글 파일에 저장 중 오류 발생!");
     }
