@@ -16,7 +16,7 @@ public class Exam0520 {
     File[] files = dir.listFiles();
 
     for (File file : files) {
-      System.out.printf("%s %s %12d %s\n",
+      System.out.printf("%s   %s %12d %s\n",
           file.isDirectory() ? "d" : "-",
               new Date(file.lastModified()),
               file.length(),

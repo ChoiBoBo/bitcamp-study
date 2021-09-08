@@ -1,4 +1,4 @@
-// 활용 - 지정한 폴더에서 .class 파일만 찾아 출력하라.11
+// 활용 - 지정한 폴더에서 .class 파일만 찾아 출력하라.
 package com.eomcs.io.ex01;
 
 import java.io.File;
@@ -19,12 +19,7 @@ public class Exam0730 {
     File[] files = dir.listFiles(new FileFilter() {
       @Override
       public boolean accept(File pathname) {
-        if (pathname.isDirectory()
-            || (pathname.isFile() && pathname.getName().endsWith(".class"))) {
-          return true;
-        }
-
-        return false;
+        return pathname.isDirectory() || (pathname.isFile() && pathname.getName().endsWith(".class"));
       }
     });
 
