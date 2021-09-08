@@ -1,6 +1,12 @@
 package com.eomcs.pms;
 
+import static com.eomcs.menu.Menu.ACCESS_ADMIN;
+import static com.eomcs.menu.Menu.ACCESS_GENERAL;
+import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,6 +45,7 @@ import com.eomcs.pms.handler.TaskListHandler;
 import com.eomcs.pms.handler.TaskUpdateHandler;
 import com.eomcs.util.Prompt;
 
+
 public class App {
   List<Board> boardList = new ArrayList<>();
   List<Member> memberList = new LinkedList<>();
@@ -49,36 +56,21 @@ public class App {
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
   ProjectPrompt projectPrompt = new ProjectPrompt(projectList);
 
-  // Menu 추상 클래스를 상속 받아서 PMS 시스템에 맞게 기능을 추가한다.
   class MenuItem extends Menu {
-
-    // inner 클래스는 컴파일할 때 바깥 클래스의 인스턴스를 저장할 필드가 자동 생성된다.
-    // 개발자가 따로 선언할 필요가 없다.
-    // 예) App this$0;
-
-    // 1) 메뉴의 ID를 저장할 필드를 선언한다.
-    // - 이 메뉴 아이디는 커맨드 객체를 찾을 때 사용할 것이다.
     String menuId;
 
-    // inner 클래스의 생성자를 컴파일 할 때 
-    // 바깥 클래스의 인스턴스를 받는 파라미터가 자동으로 추가된다.
-    // 개발자가 따로 파라미터를 추가할 필요가 없다.
-    public MenuItem(/*App outer,*/ String title, String menuId) {
-      this(/*outer,*/ title, ENABLE_ALL, menuId); // 다른 생성자와 코드가 중복 된다면 다른 생성자를 호출하라.
+    public MenuItem(String title, String menuId) {
+      super(title);
+      this.menuId = menuId;
     }
 
-    public MenuItem(/*App outer,*/String title, int enableState, String menuId) {
-      super(title, enableState);
+    public MenuItem(String title, int accessScope, String menuId) {
+      super(title, accessScope);
       this.menuId = menuId;
-      //this$0 = outer;
     }
 
     @Override
     public void execute() {
-      // inner 클래스는 바깥 클래스의 인스턴스를 내부 필드로 갖고 있기 때문에
-      // inner 클래스의 멤버를 마음대로 사용할 수 있다.
-
-      // 메뉴가 실행될 때 메뉴 아이디를 사용하여 Map에서 Command 객체를 찾아 실행한다.
       Command command = commandMap.get(menuId);
       command.execute();
     }
@@ -121,55 +113,102 @@ public class App {
   }
 
   void service() {
+    loadMembers();
+    loadBoards();
+    loadProjects();
+
     createMainMenu().execute();
     Prompt.close();
 
-    // 게시글 데이터를 파일로 내보내기(저장하기, 쓰기)
-    try (FileOutputStream out = new FileOutputStream ("board.date")) { 
-      for(Board board : boardList) {
-        out.write(board.getNo() >> 24);
-        out.write(board.getNo() >> 16);
-        out.write(board.getNo() >> 8);
-        out.write(board.getNo());
+    saveMembers();
+    saveBoards();
+    saveProjects();
+  }
 
-        //2) 게시글 제목
-        byte[] bytes = board.getTitle().getBytes("UTF-8");
-        out.write(bytes.length >> 8);
-        out.write(bytes.length);
-        out.write(bytes);
+  @SuppressWarnings("unchecked")
+  private void loadBoards() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("board.data3"))) {
 
-        bytes =board.getContent().getBytes("UTF-8");
-        out.write(bytes.length >> 8);
-        out.write(bytes.length);
-        out.write(bytes);
+      boardList.addAll((List<Board>) in.readObject());
 
-        String dateStr = board.getRegisteredDate().toString();
-        bytes = dateStr .getBytes("UTF-8");
-        out.write(bytes.length >> 8);
-        out.write(bytes.length);
-        out.write(bytes);
+      System.out.println("게시글 데이터 로딩 완료!");
 
-        out.write(board.getViewCount() >> 24);
-        out.write(board.getViewCount() >> 16);
-        out.write(board.getViewCount() >> 8);
-        out.write(board.getViewCount());
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
+  private void saveBoards() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("board.data3"))) {
 
-        out.write(board.getWriter().getNo() >> 24);
-        out.write(board.getWriter().getNo() >> 16);
-        out.write(board.getWriter().getNo() >> 8);
-        out.write(board.getWriter().getNo());
+      out.writeObject(boardList);
 
+      System.out.println("게시글 데이터 저장 완료!");
 
-        bytes = board.getTitle().getBytes("UTF-8");
-        out.write(bytes.length >> 8);
-        out.write(bytes.length);
-        out.write(bytes);
+    } catch (Exception e) {
+      System.out.println("게시글 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
-      }
+  @SuppressWarnings("unchecked")
+  private void loadMembers() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("member.data3"))) {
 
-    } catch(Exception e) {
-      System.out.println("게스글 파일에 저장 중 오류 발생!");
+      memberList.addAll((List<Member>) in.readObject());
+
+      System.out.println("회원 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 회원 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveMembers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("member.data3"))) {
+
+      out.writeObject(memberList);
+
+      System.out.println("회원 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("회원 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadProjects() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("project.data3"))) {
+
+      projectList.addAll((List<Project>) in.readObject());
+
+      System.out.println("프로젝트 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 프로젝트 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveProjects() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("project.data3"))) {
+
+      out.writeObject(projectList);
+
+      System.out.println("프로젝트 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("프로젝트 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
     }
   }
 
@@ -177,57 +216,67 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    mainMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("내정보", Menu.ENABLE_LOGIN, "/auth/userinfo"));
-    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/auth/logout"));
+    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT , "/auth/login"));
+    mainMenuGroup.add(new MenuItem("내정보", ACCESS_GENERAL, "/auth/userinfo"));
+    mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL, "/auth/logout"));
 
     mainMenuGroup.add(createBoardMenu());
     mainMenuGroup.add(createMemberMenu());
     mainMenuGroup.add(createProjectMenu());
     mainMenuGroup.add(createTaskMenu());
+    mainMenuGroup.add(createAdminMenu());
 
     return mainMenuGroup;
   }
 
   private Menu createBoardMenu() {
     MenuGroup boardMenu = new MenuGroup("게시판");
-    boardMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/board/add"));
+    boardMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    boardMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/board/update"));
-    boardMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/board/delete"));
+    boardMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/board/update"));
+    boardMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
     return boardMenu;
   }
 
   private Menu createMemberMenu() {
     MenuGroup memberMenu = new MenuGroup("회원");
-    memberMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/member/add"));
+    memberMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/member/add"));
     memberMenu.add(new MenuItem("목록", "/member/list"));
     memberMenu.add(new MenuItem("상세보기", "/member/detail"));
-    memberMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/member/update"));
-    memberMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/member/delete"));
+    memberMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/member/update"));
+    memberMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/member/delete"));
     return memberMenu;
   }
 
   private Menu createProjectMenu() {
     MenuGroup projectMenu = new MenuGroup("프로젝트");
-    projectMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/project/add"));
+    projectMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/project/add"));
     projectMenu.add(new MenuItem("목록", "/project/list"));
     projectMenu.add(new MenuItem("상세보기", "/project/detail"));
-    projectMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/project/update"));
-    projectMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/project/delete"));
+    projectMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/project/update"));
+    projectMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/project/delete"));
     return projectMenu;
   }
 
   private Menu createTaskMenu() {
     MenuGroup taskMenu = new MenuGroup("작업");
-    taskMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/task/add"));
+    taskMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/task/add"));
     taskMenu.add(new MenuItem("목록", "/task/list"));
     taskMenu.add(new MenuItem("상세보기", "/task/detail"));
-    taskMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/task/update"));
-    taskMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/task/delete"));
+    taskMenu.add(new MenuItem("변경", ACCESS_GENERAL, "/task/update"));
+    taskMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/task/delete"));
     return taskMenu;
+  }
+
+  private Menu createAdminMenu() {
+    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
+    adminMenu.add(new MenuItem("회원 등록", "/member/add"));
+    adminMenu.add(new MenuItem("프로젝트 등록", "/project/add"));
+    adminMenu.add(new MenuItem("작업 등록", "/task/add"));
+    adminMenu.add(new MenuItem("게시글 등록", "/board/add"));
+    return adminMenu;
   }
 }
 
