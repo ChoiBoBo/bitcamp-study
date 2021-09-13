@@ -3,7 +3,7 @@ package com.eomcs.io.ex08;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class BufferedInputStream {
+public class BufferedInputStream extends InputSream {
   InputStream in;
 
   byte[] buf = new byte[8192];
