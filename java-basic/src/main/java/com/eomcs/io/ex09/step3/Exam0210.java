@@ -15,6 +15,7 @@ public class Exam0210 {
 
     int b;
 
+
     long startTime = System.currentTimeMillis(); // 밀리초
 
     int callCount = 0;
