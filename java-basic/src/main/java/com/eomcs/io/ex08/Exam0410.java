@@ -1,4 +1,4 @@
-// 포함 관계로 기능 확장하기 - 현재 구조의 문제점
+// 포함 관계로 기능 확장하기 - 현재 구조의 문제점..
 package com.eomcs.io.ex08;
 
 import java.io.FileOutputStream;
