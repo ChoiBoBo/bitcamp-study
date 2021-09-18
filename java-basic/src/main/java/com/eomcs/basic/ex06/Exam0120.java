@@ -1,4 +1,4 @@
-// Queue 구현과 사용 : for
+// Queue 구현과 사용 : for(:)
 package com.eomcs.basic.ex06;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -16,10 +16,10 @@ public class Exam0120 {
     queue.offer(s1); // aaa,
     queue.offer(s2); // aaa, bbb,
     queue.offer(s3); // aaa, bbb, ccc,
-    queue.offer(s4); // ccc, ddd,
-    queue.offer(s5); // ccc, ddd, eee,
+    queue.offer(s4); // aaa, bbb, ccc, ddd,
+    queue.offer(s5); // aaa, bbb, ccc, ddd, eee,
 
-    for(String s: queue) {
+    for (String s : queue) {
       System.out.println(s);
     }
   }
