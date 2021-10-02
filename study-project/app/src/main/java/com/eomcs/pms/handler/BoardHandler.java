@@ -6,13 +6,16 @@ import com.eomcs.util.Prompt;
 
 public class BoardHandler {
 
+  // 모든 게시판의 최대 배열 개수가 같기 때문에 다음 변수는 
+  // 그냥 static 필드로 남겨둔다.
   static final int MAX_LENGTH = 5;
 
-  // Board 인스턴스의 주소를 저장할 레퍼런스 배열을 생성한다.
-  static Board[] boards = new Board[MAX_LENGTH];
-  static int size = 0;
+  // 게시판 마다 따로 관리해야 하기 때문에 인스턴스 필드로 전환한다.
+  // => static 옵션을 뺀다.
+  Board[] boards = new Board[MAX_LENGTH];
+  int size = 0;
 
-  public static void add() {
+  public void add() {
     System.out.println("[새 게시글]");
 
     Board board = new Board();
@@ -24,19 +27,19 @@ public class BoardHandler {
     board.registeredDate = new Date(System.currentTimeMillis());
     //    board.viewCount = 0; // 인스턴스 변수는 생성되는 순간 기본 값이 0으로 설정된다.
 
-    boards[size++] = board;
+    this.boards[this.size++] = board;
   }
 
-  public static void list() {
+  public void list() {
     System.out.println("[게시글 목록]");
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          boards[i].no, 
-          boards[i].title, 
-          boards[i].writer,
-          boards[i].registeredDate,
-          boards[i].viewCount, 
-          boards[i].like);
+          this.boards[i].no, 
+          this.boards[i].title, 
+          this.boards[i].writer,
+          this.boards[i].registeredDate,
+          this.boards[i].viewCount, 
+          this.boards[i].like);
     }
   }
 }
